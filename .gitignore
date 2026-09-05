@@ -13,6 +13,10 @@ images/
 *.traineddata
 tesseract-extracted/
 
+# 安装脚本自动下载的语言包与离线依赖包目录
+tessdata/
+packages/
+
 # 系统与编辑器
 .DS_Store
 Thumbs.db

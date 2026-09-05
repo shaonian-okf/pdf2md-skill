@@ -20,8 +20,10 @@ pdf2md_tool/
 │   └── skills/
 │       └── pdf2md/              # opencode 技能定义（自包含，可整体拷贝）
 │           ├── SKILL.md         # 技能说明：触发条件、工作流程、输出规范
+│           ├── INSTALL.md       # 安装手册（中英双语，含离线方案）
 │           └── scripts/
-│               └── pdf2md.py    # 核心转换脚本（也可独立命令行运行）
+│               ├── pdf2md.py    # 核心转换脚本（也可独立命令行运行）
+│               └── install_deps.py  # 一键依赖安装脚本（pip 依赖 + 语言包）
 ├── requirements.txt             # Python 依赖清单
 ├── run.bat                      # Windows 一键运行
 ├── run.sh                       # Linux / macOS 一键运行
@@ -86,6 +88,14 @@ python .opencode/skills/pdf2md/scripts/pdf2md.py 文档.pdf --lang en
 Windows 可拖放 PDF 到 `run.bat`；Linux/macOS 使用 `./run.sh 文档.pdf`。
 
 ### 三、安装依赖 / Install dependencies
+
+**0. 一键安装（推荐）**
+
+```bash
+python .opencode/skills/pdf2md/scripts/install_deps.py
+```
+
+自动完成：pip 安装 Python 依赖 → 检测 tesseract 引擎（缺失时给出平台指引）→ 下载缺失的 chi_sim/eng 语言包到技能目录 `tessdata/`。完整安装手册（含离线安装方案与验证步骤）见 `.opencode/skills/pdf2md/INSTALL.md`。
 
 **1. Python 依赖**
 
@@ -193,6 +203,14 @@ python .opencode/skills/pdf2md/scripts/pdf2md.py document.pdf --lang en
 Windows: drag the PDF onto `run.bat`. Linux/macOS: `./run.sh document.pdf`.
 
 ### Dependencies
+
+**One-click install (recommended)**
+
+```bash
+python .opencode/skills/pdf2md/scripts/install_deps.py
+```
+
+It installs pip deps, detects the tesseract engine (with platform guidance if missing), and downloads any missing `chi_sim`/`eng` language data into the skill's `tessdata/` folder. See `.opencode/skills/pdf2md/INSTALL.md` for the full manual (including offline install and verification steps).
 
 ```bash
 pip install -r requirements.txt   # pymupdf, Pillow, pytesseract

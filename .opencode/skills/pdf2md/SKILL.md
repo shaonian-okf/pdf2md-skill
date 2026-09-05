@@ -54,14 +54,18 @@ license: MIT
 
 ## 依赖安装 / Install dependencies
 
+推荐使用技能自带的一键安装脚本（自动完成 pip 依赖、tesseract 检测指引与语言包下载），完整的安装手册见技能目录下的 `INSTALL.md`。
+
 ```bash
-pip install -r requirements.txt        # pymupdf、Pillow、pytesseract
+python <技能目录>/scripts/install_deps.py     # 一键安装（推荐）
+pip install -r requirements.txt               # 仅安装 Python 依赖
 ```
 
 tesseract 引擎（非 pip 包，需含 chi_sim 与 eng 语言包）：
 - Windows：https://github.com/UB-Mannheim/tesseract 安装时勾选简体中文语言包
 - macOS：`brew install tesseract tesseract-lang`
 - Linux：`sudo apt install tesseract-ocr tesseract-ocr-chi-sim`
+- 语言包缺失时，安装脚本会自动下载到技能目录 `tessdata/`，脚本运行时会自动搜索该目录
 
 ## 降级方案 / Fallback（脚本不可用时）
 
