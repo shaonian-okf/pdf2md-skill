@@ -1,0 +1,7 @@
+# pdf2md.py 的 Python 依赖
+# 核心 PDF 处理（文本 + 图片提取）
+pymupdf>=1.20
+
+# 图片预处理与 OCR（pytesseract 仅为 OCR 封装，还需另行安装 tesseract 引擎）
+Pillow>=9.0
+pytesseract>=0.3.10

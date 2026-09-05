@@ -1,0 +1,17 @@
+# 换行符规范（跨平台协作关键 / cross-platform line endings）
+* text=auto
+
+# shell 脚本必须 LF：否则 Linux/macOS 上会报 "bad interpreter"
+*.sh text eol=lf
+
+# Python 源码统一 LF
+*.py text eol=lf
+
+# Windows 批处理保留 CRLF
+*.bat text eol=crlf
+
+# 文本与文档按平台默认处理
+*.md text
+*.txt text
+*.json text
+*.toml text

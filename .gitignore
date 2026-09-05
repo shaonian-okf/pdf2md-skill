@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 转换输出产物（不入库）
+images/
+*_完整版.md
+
+# 大型语言数据包（tesseract 训练数据，体积大且可从官网下载）
+*.traineddata
+tesseract-extracted/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
