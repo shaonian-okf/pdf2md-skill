@@ -15,7 +15,7 @@
 ## 目录结构 / Layout
 
 ```
-pdf2md_tool/
+pdf2md_skill/
 ├── pdf2md/                      # opencode 技能目录（自包含，可整体拷贝）
 │   ├── SKILL.md                 # 技能说明：触发条件、工作流程、输出规范
 │   ├── INSTALL.md               # 安装手册（中英双语，含离线方案）
