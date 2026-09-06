@@ -16,14 +16,12 @@
 
 ```
 pdf2md_tool/
-├── .opencode/
-│   └── skills/
-│       └── pdf2md/              # opencode 技能定义（自包含，可整体拷贝）
-│           ├── SKILL.md         # 技能说明：触发条件、工作流程、输出规范
-│           ├── INSTALL.md       # 安装手册（中英双语，含离线方案）
-│           └── scripts/
-│               ├── pdf2md.py    # 核心转换脚本（也可独立命令行运行）
-│               └── install_deps.py  # 一键依赖安装脚本（pip 依赖 + 语言包）
+├── pdf2md/                      # opencode 技能目录（自包含，可整体拷贝）
+│   ├── SKILL.md                 # 技能说明：触发条件、工作流程、输出规范
+│   ├── INSTALL.md               # 安装手册（中英双语，含离线方案）
+│   └── scripts/
+│       ├── pdf2md.py            # 核心转换脚本（也可独立命令行运行）
+│       └── install_deps.py      # 一键依赖安装脚本（pip 依赖 + 语言包）
 ├── requirements.txt             # Python 依赖清单
 ├── run.bat                      # Windows 一键运行
 ├── run.sh                       # Linux / macOS 一键运行
@@ -41,10 +39,11 @@ pdf2md_tool/
 **方式 A：复制到项目（推荐）/ Copy into your project (recommended)**
 
 ```bash
-git clone https://github.com/<你的用户名>/pdf2md_tool.git
-copy /Y pdf2md_tool\.opencode 你的项目\.opencode   # Windows
-# Linux / macOS:
-cp -r pdf2md_tool/.opencode ./你的项目/
+git clone https://github.com/shaonian-okf/pdf2md-skill.git
+# Windows：把 pdf2md 目录复制到项目的技能目录
+xcopy /E /I pdf2md 你的项目\.opencode\skills\pdf2md
+# Linux / macOS：
+cp -r pdf2md ./你的项目/.opencode/skills/pdf2md
 ```
 
 然后**重启 opencode**，会话中直接说：
@@ -61,7 +60,7 @@ cp -r pdf2md_tool/.opencode ./你的项目/
 {
   "$schema": "https://opencode.ai/config.json",
   "skills": {
-    "paths": ["D:/path/to/pdf2md_tool/.opencode/skills"]
+    "paths": ["D:/path/to/pdf2md-skill/pdf2md"]
   }
 }
 ```
@@ -70,19 +69,19 @@ cp -r pdf2md_tool/.opencode ./你的项目/
 
 **方式 C：全局安装 / Global install**
 
-复制 `.opencode/skills/pdf2md` 到 `~/.config/opencode/skills/pdf2md/`，所有项目均可使用。
+把仓库中的 `pdf2md` 目录复制到全局技能目录 `~/.config/opencode/skills/pdf2md/`，所有项目均可使用。
 
 ### 二、作为独立命令行工具使用 / Standalone CLI
 
 ```bash
 # 基本用法（输出到 PDF 所在目录）
-python .opencode/skills/pdf2md/scripts/pdf2md.py 文档.pdf
+python pdf2md/scripts/pdf2md.py 文档.pdf
 
 # 指定输出目录
-python .opencode/skills/pdf2md/scripts/pdf2md.py 文档.pdf output_folder
+python pdf2md/scripts/pdf2md.py 文档.pdf output_folder
 
 # 英文控制台提示
-python .opencode/skills/pdf2md/scripts/pdf2md.py 文档.pdf --lang en
+python pdf2md/scripts/pdf2md.py 文档.pdf --lang en
 ```
 
 Windows 可拖放 PDF 到 `run.bat`；Linux/macOS 使用 `./run.sh 文档.pdf`。
@@ -92,10 +91,10 @@ Windows 可拖放 PDF 到 `run.bat`；Linux/macOS 使用 `./run.sh 文档.pdf`�
 **0. 一键安装（推荐）**
 
 ```bash
-python .opencode/skills/pdf2md/scripts/install_deps.py
+python pdf2md/scripts/install_deps.py
 ```
 
-自动完成：pip 安装 Python 依赖 → 检测 tesseract 引擎（缺失时给出平台指引）→ 下载缺失的 chi_sim/eng 语言包到技能目录 `tessdata/`。完整安装手册（含离线安装方案与验证步骤）见 `.opencode/skills/pdf2md/INSTALL.md`。
+自动完成：pip 安装 Python 依赖 → 检测 tesseract 引擎（缺失时给出平台指引）→ 下载缺失的 chi_sim/eng 语言包到技能目录 `tessdata/`。完整安装手册（含离线安装方案与验证步骤）见 `pdf2md/INSTALL.md`。
 
 **1. Python 依赖**
 
@@ -149,7 +148,7 @@ images/                    # 提取的全部图片（相对路径统一用 /，�
 | 提示缺少 pymupdf | `pip install pymupdf` |
 | 未找到 tesseract | 设置环境变量 `TESSERACT_PATH` 指向 tesseract 可执行文件 |
 | OCR 识别不出中文 | 确认已安装简体中文语言包（chi_sim.traineddata） |
-| opencode 中技能未生效 | 确认目录为 `.opencode/skills/pdf2md/SKILL.md` 并重启 opencode |
+| opencode 中技能未生效 | 确认技能目录为 `.opencode/skills/pdf2md/SKILL.md`（复制到项目后）并重启 opencode |
 | 控制台中文乱码（Windows） | 使用 `run.bat`（含 UTF-8 代码页切换）或较新的 Windows 终端 |
 
 ### 七、技术原理 / How it works
@@ -168,8 +167,8 @@ images/                    # 提取的全部图片（相对路径统一用 /，�
 **Option A — Clone and copy into your project (recommended)**
 
 ```bash
-git clone https://github.com/<your-username>/pdf2md_tool.git
-cp -r pdf2md_tool/.opencode ./your-project/
+git clone https://github.com/shaonian-okf/pdf2md-skill.git
+cp -r pdf2md ./your-project/.opencode/skills/pdf2md
 ```
 
 Restart opencode, then say e.g. *"Convert xx.pdf to Markdown"* or *"Extract text and images from this PDF and OCR the figures."*
@@ -180,24 +179,24 @@ Restart opencode, then say e.g. *"Convert xx.pdf to Markdown"* or *"Extract text
 {
   "$schema": "https://opencode.ai/config.json",
   "skills": {
-    "paths": ["/path/to/pdf2md_tool/.opencode/skills"]
+    "paths": ["/path/to/pdf2md-skill/pdf2md"]
   }
 }
 ```
 
-**Option C — Global install:** copy `.opencode/skills/pdf2md` to `~/.config/opencode/skills/pdf2md/`.
+**Option C — Global install:** copy the `pdf2md` directory to `~/.config/opencode/skills/pdf2md/`.
 
 ### Standalone CLI usage
 
 ```bash
 # Default: output next to the PDF
-python .opencode/skills/pdf2md/scripts/pdf2md.py document.pdf
+python pdf2md/scripts/pdf2md.py document.pdf
 
 # Custom output directory
-python .opencode/skills/pdf2md/scripts/pdf2md.py document.pdf out_folder
+python pdf2md/scripts/pdf2md.py document.pdf out_folder
 
 # English console messages
-python .opencode/skills/pdf2md/scripts/pdf2md.py document.pdf --lang en
+python pdf2md/scripts/pdf2md.py document.pdf --lang en
 ```
 
 Windows: drag the PDF onto `run.bat`. Linux/macOS: `./run.sh document.pdf`.
@@ -207,10 +206,10 @@ Windows: drag the PDF onto `run.bat`. Linux/macOS: `./run.sh document.pdf`.
 **One-click install (recommended)**
 
 ```bash
-python .opencode/skills/pdf2md/scripts/install_deps.py
+python pdf2md/scripts/install_deps.py
 ```
 
-It installs pip deps, detects the tesseract engine (with platform guidance if missing), and downloads any missing `chi_sim`/`eng` language data into the skill's `tessdata/` folder. See `.opencode/skills/pdf2md/INSTALL.md` for the full manual (including offline install and verification steps).
+It installs pip deps, detects the tesseract engine (with platform guidance if missing), and downloads any missing `chi_sim`/`eng` language data into the skill's `tessdata/` folder. See `pdf2md/INSTALL.md` for the full manual (including offline install and verification steps).
 
 ```bash
 pip install -r requirements.txt   # pymupdf, Pillow, pytesseract
@@ -244,7 +243,7 @@ images/                    # Extracted images
 | pymupdf missing | `pip install pymupdf` |
 | tesseract not found | Set `TESSERACT_PATH` to the tesseract executable |
 | Chinese OCR not working | Install the Simplified Chinese language pack (`chi_sim.traineddata`) |
-| Skill not active in opencode | Check the path is `.opencode/skills/pdf2md/SKILL.md` and restart opencode |
+| Skill not active in opencode | Copy `pdf2md/` to `.opencode/skills/pdf2md/` in your project, then restart opencode |
 
 ## License
 

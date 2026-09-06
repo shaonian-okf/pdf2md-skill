@@ -25,4 +25,4 @@ if ! command -v python3 >/dev/null 2>&1; then
     PY=python
 fi
 
-exec "$PY" .opencode/skills/pdf2md/scripts/pdf2md.py "$PDF_FILE" "$@"
+exec "$PY" pdf2md/scripts/pdf2md.py "$PDF_FILE" "$@"

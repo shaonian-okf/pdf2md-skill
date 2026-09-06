@@ -4,7 +4,7 @@
 This manual guides you through installing all dependencies of the pdf2md skill on Windows, Linux and macOS.
 
 > **快捷方式 / Quick start**：一条命令完成 Python 依赖与语言包的检查/安装：
-> `python .opencode/skills/pdf2md/scripts/install_deps.py`
+> `python pdf2md/scripts/install_deps.py`
 
 ---
 
@@ -24,7 +24,7 @@ This manual guides you through installing all dependencies of the pdf2md skill o
 在项目根目录执行：
 
 ```bash
-python .opencode/skills/pdf2md/scripts/install_deps.py
+python pdf2md/scripts/install_deps.py
 ```
 
 脚本会自动完成：
@@ -66,7 +66,7 @@ pip install --no-index --find-links=packages/ -r requirements.txt
 - **自动方式**：运行一键安装脚本，缺失的 `chi_sim.traineddata` 与 `eng.traineddata` 会自动下载到技能目录 `tessdata/`。
 - **手动方式**：从 https://github.com/tesseract-ocr/tessdata 下载这两个文件，放入技能目录下的 `tessdata/` 文件夹。
 
-> 语言包存放位置：`.opencode/skills/pdf2md/tessdata/`（脚本启动时会自动搜索该目录）。
+> 语言包存放位置：`pdf2md/tessdata/`（脚本启动时会自动搜索该目录）。
 
 #### 4. 设置环境变量（可选但推荐）
 
@@ -87,7 +87,7 @@ export TESSERACT_PATH=/usr/bin/tesseract
 运行一次真实转换测试：
 
 ```bash
-python .opencode/skills/pdf2md/scripts/pdf2md.py some.pdf output_folder
+python pdf2md/scripts/pdf2md.py some.pdf output_folder
 ```
 
 - 看到 `[工具] 使用 tesseract: ...` 且输出"OCR 识别图片数量"大于 0，说明全套就绪。
@@ -126,7 +126,7 @@ python .opencode/skills/pdf2md/scripts/pdf2md.py some.pdf output_folder
 Run from the project root:
 
 ```bash
-python .opencode/skills/pdf2md/scripts/install_deps.py
+python pdf2md/scripts/install_deps.py
 ```
 
 The script will: ①install Python deps via pip (pymupdf, Pillow, pytesseract); ②detect the tesseract engine and print platform-specific guidance if missing; ③download missing `chi_sim`/`eng` language data into the skill's `tessdata/` folder.
@@ -137,13 +137,13 @@ Skip parts with `--skip-pip` or `--skip-tessdata`.
 
 1. **Python deps** — online: `pip install -r requirements.txt`. Offline: `pip download -r requirements.txt -d packages/` on a networked machine, then `pip install --no-index --find-links=packages/ -r requirements.txt`.
 2. **Tesseract engine** — Windows: [UB-Mannheim installer](https://github.com/UB-Mannheim/tesseract) (check the Simplified Chinese language pack). macOS: `brew install tesseract tesseract-lang`. Linux: `sudo apt install tesseract-ocr tesseract-ocr-chi-sim`.
-3. **Language data** — auto: run the install script; manual: download `chi_sim.traineddata` and `eng.traineddata` from [tesseract-ocr/tessdata](https://github.com/tesseract-ocr/tessdata) into `.opencode/skills/pdf2md/tessdata/`.
+3. **Language data** — auto: run the install script; manual: download `chi_sim.traineddata` and `eng.traineddata` from [tesseract-ocr/tessdata](https://github.com/tesseract-ocr/tessdata) into `pdf2md/tessdata/`.
 4. **Environment variable (optional but recommended)** — set `TESSERACT_PATH` to the tesseract executable.
 
 ### Verify
 
 ```bash
-python .opencode/skills/pdf2md/scripts/pdf2md.py some.pdf output_folder
+python pdf2md/scripts/pdf2md.py some.pdf output_folder
 ```
 
 If you see `[Tool] Using tesseract:` and an OCR image count greater than zero, everything works.

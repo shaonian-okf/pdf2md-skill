@@ -21,7 +21,7 @@ if not exist "%PDF_FILE%" (
     exit /b 1
 )
 
-python ".opencode\skills\pdf2md\scripts\pdf2md.py" "%PDF_FILE%"
+python "pdf2md\scripts\pdf2md.py" "%PDF_FILE%"
 
 echo.
 pause

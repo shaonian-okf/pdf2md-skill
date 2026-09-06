@@ -24,8 +24,8 @@ import argparse
 import subprocess
 import urllib.request
 
-# 仓库根目录（本脚本位于 .opencode/skills/pdf2md/scripts/ 下，向上回溯四级）
-_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..'))
+# 仓库根目录（本脚本位于 pdf2md/scripts/ 下，向上回溯二级）
+_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 _SKILL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # pdf2md 技能目录
 _REQ_FILE = os.path.join(_REPO_ROOT, 'requirements.txt')
 _TESSDATA_DIR = os.path.join(_SKILL_DIR, 'tessdata')  # 语言包存放目录
